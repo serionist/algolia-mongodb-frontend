@@ -43,7 +43,7 @@ This is the application that is available to our end users. It is marketed, avai
 
 Our current architecture looks like the following:
 
-![original_architecture](.\original_architecture.png)
+![original_architecture](./original_architecture.png)
 
 I am managing the **Data Layer** for this project. The individual entities on the diagram are as follows:
 
