@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/satellite-min.css">
   <link rel="stylesheet" href="./src/index.css">
   <link rel="stylesheet" href="./src/app.css">
+  <link rel="stylesheet" href="./src/algolia.css">
+  <link rel="stylesheet" href="./src/setup.css">
+
 
   <title>Demo Listings Search Application</title>
 
@@ -22,10 +25,28 @@
     <h1 class="header-title">
       <a href="/">Demo Listings Search Application</a>
     </h1>
+    <a href="#" onclick="showSetup();" id="setup-link">Change Algolia properties</a>
   </header>
 
+  <form id="setup-container">
+    <h2>Get started with the Demo Application</h2>
+    <p>Please provide the details of the Algolia index that you have created based on the blog post or <a href="#" onclick="setupDefaults();"><b>continue with defaults</b></a> to use the Index that was created by the authors as part of the post.</p>
+    <p>The Application ID & Search-Only API key are available on the <a href="https://www.algolia.com/account/api-keys/all" target="_blank">API keys page</a> of your application. Please also create an index and fill it with the sample data as per the steps in the <a target="_blank" href="https://colab.research.google.com/drive/1hO996af5PzI1piGdFlTyr1InhGJmUED0">Jupyter Notebook</a>.</p>
 
-  <div class="container">
+    <div class="placeholder">The Algolia Application ID:</div>
+    <input id="setup-app-id" type="text" tabIndex="0" oninput="canSetupContinue();">
+    <div class="placeholder">Search-Only API Key:</div>
+    <input id="setup-search-key" type="text" tabIndex="1" oninput="canSetupContinue();">
+    <div class="placeholder">The Index name:</div>
+    <input id="setup-index-name" type="text" tabIndex="2" oninput="canSetupContinue();">
+    <div id="setup-error-message"></div>
+    <div class="buttons">
+      <button id="setup-skip" onclick="setupDefaults();" class="ais-InfiniteHits-loadMore" type="button" tabindex="3">Skip, continue with defaults</button>
+      <button id="setup-continue" class="ais-InfiniteHits-loadMore" type="submit" tabindex="4" onclick="submitSetup()">Save & Continue</button>
+    </div>
+    
+  </form>
+  <div id="algolia-container">
     
     <div id="searchbox"></div>
 
@@ -75,6 +96,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.10.5/dist/algoliasearch-lite.umd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.41.2"></script>
+  <script src="./src/algolia.js"></script>
   <script src="./src/app.js"></script>
 </body>
 
