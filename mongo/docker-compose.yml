@@ -1,29 +1,36 @@
 version: "3.8"
 services:
   mongodb:
-    build: 
-      context: ./mongo
-      args:
-        INIT_COLLECTION_URL: https://raw.githubusercontent.com/budavariam/mongodb-sample-dataset/main/sample_airbnb/listingsAndReviews.json
+    image: mongo
     container_name: mongodb
+    hostname: mongodb
     environment:
     - MONGO_INITDB_ROOT_USERNAME=$ROOT_USER
     - MONGO_INITDB_ROOT_PASSWORD=$ROOT_PASS
-    - MONGO_INITDB_DATABASE=airbnb # tell thee mongo image to create this db
-    - INIT_COLLECTION=listingsAndReviews # tell the init script to use this collection
     volumes:
       - ./mongodb-data:/data/db # persist db in a local folder
-      - ./docker-entrypoint-initdb.d/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh:ro # init db on start
-    # networks:
-    # - mongodb_network
     ports:
     - 27017:27017
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
-      interval: 30s
+      interval: 5s
       timeout: 10s
-      retries: 3
+      retries: 10
     restart: unless-stopped
+  mongosetup:
+    build:
+      context: ./mongosetup
+      args:
+        - INIT_COLLECTION_URL=$INIT_COLLECTION_URL
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    restart: "no"
+    environment:
+      - MONGO_USER=$ROOT_USER
+      - MONGO_PASSWORD=$ROOT_PASS
+      - MONGO_DB=airbnb
+      - MONGO_COLLECTION=listingsAndReviews
   mongo-express:
     image: mongo-express
     container_name: mongo-express
@@ -36,8 +43,6 @@ services:
     - ME_CONFIG_BASICAUTH_PASSWORD=$GUI_AUTH_PASS
     depends_on:
     - mongodb
-    # networks:
-    # - mongodb_network
     ports:
     - 8081:8081
     healthcheck:
@@ -46,9 +51,3 @@ services:
       timeout: 10s
       retries: 3
     restart: unless-stopped
-# volumes:
-#   mongodb-data:
-#     name: mongodb-data
-# networks:
-#   mongodb_network:
-#     name: mongodb_network
