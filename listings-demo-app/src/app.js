@@ -1,7 +1,8 @@
 // IMPORTANT: Algolia specific code is contained in 'algolia.js'
-// This JS file is responsible for checking if a user has configured the application with an AppId, SearchKey and IndexName.
+// This JS file is responsible for checking if a user has configured the application with an Algolia AppId, SearchKey and IndexName.
 // If the app is not configured, it shows the search form. 
-// If the app is configured, it initialized Algolia
+// If the app is configured, it initializes Algolia by calling init_algolia() which is contained in algolia.js
+
 const DEFAULT_APP_ID = 'XZOLQ7O0XC';
 const DEFAULT_SEARCH_KEY = 'f484aba5fb5ebb9b4317e81328f638a9';
 const DEFAULT_INDEX_NAME = 'test_index';

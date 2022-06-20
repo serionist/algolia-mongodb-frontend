@@ -23,6 +23,7 @@
 
 .ais-Highlight-highlighted {
     color: inherit;
+    background-color: rgba(84,104,255,.4);
     font-size: inherit;
 }
 
