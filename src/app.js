@@ -83,3 +83,8 @@ function submitSetup() {
 
 
 initApp();
+
+window.showSetup = showSetup;
+window.canSetupContinue = canSetupContinue;
+window.setupDefaults = setupDefaults;
+window.submitSetup = submitSetup;
