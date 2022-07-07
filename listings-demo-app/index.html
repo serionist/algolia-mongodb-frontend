@@ -46,52 +46,58 @@
     </div>
     
   </form>
+  <!--Used to host the Algolia search UI-->
   <div id="algolia-container">
-    
+    <!-- The search box. Located on the top of the page, spanning the entire width -->
     <div id="searchbox"></div>
 
+    <!-- The filters section, located on the left -->
     <div class="filters">
       <h2>Filters</h2>
-      <div id="dynamic-widgets"></div>
+      <!-- Clear filters button location -->
       <div id="clear-refinements"></div>
-
+      <!-- Country filter location -->
       <h3>Country</h3>
       <div id="country-list"></div>
-
+      <!-- Property Types filter location -->
       <h3>Property Types</h3>
       <div id="property-list"></div>
-
+      <!-- Review scores filter location -->
       <h3>Review Scores</h3>
       <div id="review-scores"></div>
+      <!-- Price filter location -->
       <h3>Price</h3>
       <div id="price"></div>
+      <!-- Cleaning fee filter location -->
       <h3>Cleaning Fee</h3>
       <div id="cleaning-fee"></div>
     </div>
 
+    <!-- The results panel, located to the right side from the filters -->
     <div class="results">
       <h2>Results</h2>
+      <!-- The pagination container, which was later changed to infinite scroll results container -->
       <div class="pagination-container">
+        <!-- The container which displays the number of results, and a link which can load the next set of results. These are modified from js -->
         <div id="result-count">
           <span></span>
           <a href="#"></a>
         </div>
-        <div id="hits-count"></div>
+        <!-- The location of the control that controls how many results are loaded at once -->
+        <div id="per-page"></div>
       </div>
       
+      <!-- The location for the map which shows the results on the world map -->
       <div id="map-display">
         <h3>Map</h3>
         <div id="geo-search"></div>
       </div>
-
+      <!-- The location of the search result details -->
       <div id="details-display">
         <h3>Details</h3>
         <div id="hits"></div>
       </div>
-      
-      
     </div>
-
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.10.5/dist/algoliasearch-lite.umd.js"></script>
