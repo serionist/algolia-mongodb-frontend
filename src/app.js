@@ -1,3 +1,4 @@
+import { init_algolia } from "./algolia";
 // IMPORTANT: Algolia specific code is contained in 'algolia.js'
 // This JS file is responsible for checking if a user has configured the application with an Algolia AppId, SearchKey and IndexName.
 // If the app is not configured, it shows the search form. 
